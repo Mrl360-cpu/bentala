@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZCP Secret Hub | 5 Mini Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        #studio-container {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .game-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.3s var(--spring);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--emerald);
+        }
+
+        .game-card i {
+            font-size: 3rem;
+            color: var(--emerald);
+            margin-bottom: 15px;
+        }
+
+        #game-stage {
+            display: none;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 40px;
+            margin-top: 40px;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--white);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+
+        canvas {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mesh-bg"></div>
+    <div id="studio-container">
+        <h1 class="hero-main-title" style="font-size: 3rem;">ZCP GAME HUB</h1>
+        <p style="color: #94a3b8;">Welcome, creator. Pick a secret mission.</p>
+
+        <div class="game-grid" id="menu">
+            <div class="game-card" onclick="startGame(1)">
+                <i class="fas fa-leaf"></i>
+                <h3>Nature Catch</h3>
+            </div>
+            <div class="game-card" onclick="startGame(2)">
+                <i class="fas fa-trash"></i>
+                <h3>Sea Cleaner</h3>
+            </div>
+            <div class="game-card" onclick="startGame(3)">
+                <i class="fas fa-tree"></i>
+                <h3>Forest Clicker</h3>
+            </div>
+            <div class="game-card" onclick="startGame(4)">
+                <i class="fas fa-shield-virus"></i>
+                <h3>Eco Dodge</h3>
+            </div>
+            <div class="game-card" onclick="startGame(5)">
+                <i class="fas fa-bolt"></i>
+                <h3>Zap Trash</h3>
+            </div>
+        </div>
+
+        <div id="game-stage">
+            <div class="back-btn" onclick="showMenu()"><i class="fas fa-arrow-left"></i> Menu</div>
+            <h2 id="game-title" style="margin-bottom: 20px; color: var(--emerald);">Title</h2>
+            <div id="game-content">
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+            <a href="http://zegahcreative.rf.gd" target="_blank" class="game-card"
+                style="padding: 15px 40px; text-decoration: none; display: flex; align-items: center; gap: 15px; border-color: rgba(16, 185, 129, 0.4);">
+                <i class="fas fa-external-link-alt" style="font-size: 1.2rem; margin: 0;"></i>
+                <span style="color: white; font-weight: 600;">Visit Zegah Creative Studio</span>
+            </a>
+            <a href="index.html" style="color: #64748b; text-decoration: none; font-size: 0.9rem;">Exit Secret
+                Studio</a>
+        </div>
+    </div>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const stage = document.getElementById('game-stage');
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+        let score = 0;
+
+        function showMenu() {
+            cancelAnimationFrame(animationId);
+            menu.style.display = 'grid';
+            stage.style.display = 'none';
+        }
+
+        function startGame(id) {
+            menu.style.display = 'none';
+            stage.style.display = 'block';
+            score = 0;
+            const titles = ["Nature Catch", "Sea Cleaner", "Forest Clicker", "Eco Dodge", "Zap Trash"];
+            document.getElementById('game-title').innerText = titles[id - 1];
+
+            if (id === 1) playCatch();
+            if (id === 2) playCleaner();
+            if (id === 3) playClicker();
+            if (id === 4) playDodge();
+            if (id === 5) playZap();
+        }
+
+        // --- GAME 1: CATCH ---
+        function playCatch() {
+            let px = 300, py = 350, objects = [];
+            canvas.onmousemove = (e) => px = e.offsetX;
+            function loop() {
+                ctx.clearRect(0, 0, 600, 400);
+                if (Math.random() < 0.05) objects.push({ x: Math.random() * 600, y: 0 });
+                ctx.fillStyle = "#10b981";
+                ctx.fillRect(px - 30, py, 60, 20);
+                objects.forEach((o, i) => {
+                    o.y += 3;
+                    ctx.fillText("🌿", o.x, o.y);
+                    if (o.y > 350 && Math.abs(o.x - px) < 30) { score++; objects.splice(i, 1); }
+                    if (o.y > 400) objects.splice(i, 1);
+                });
+                ctx.fillText("Score: " + score, 10, 20);
+                animationId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        // --- GAME 2: CLEANER ---
+        function playCleaner() {
+            let trash = [];
+            canvas.onclick = (e) => {
+                trash.forEach((t, i) => {
+                    if (Math.hypot(t.x - e.offsetX, t.y - e.offsetY) < 30) { score++; trash.splice(i, 1); }
+                });
+            }
+            function loop() {
+                ctx.clearRect(0, 0, 600, 400);
+                if (Math.random() < 0.03) trash.push({ x: Math.random() * 600, y: Math.random() * 400, age: 0 });
+                trash.forEach((t, i) => {
+                    t.age++;
+                    ctx.fillText("🥤", t.x, t.y);
+                    if (t.age > 100) trash.splice(i, 1);
+                });
+                ctx.fillText("Tap Trash! Score: " + score, 10, 20);
+                animationId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        // --- GAME 3: CLICKER ---
+        function playClicker() {
+            canvas.onclick = () => score++;
+            function loop() {
+                ctx.clearRect(0, 0, 600, 400);
+                ctx.font = "30px Arial";
+                ctx.fillText("🌲".repeat(Math.min(score, 20)), 100, 200);
+                ctx.fillText("Click to Grow Forest: " + score, 10, 50);
+                animationId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        // --- GAME 4: DODGE ---
+        function playDodge() {
+            let px = 300, py = 350, enemies = [];
+            canvas.onmousemove = (e) => px = e.offsetX;
+            function loop() {
+                ctx.clearRect(0, 0, 600, 400);
+                if (Math.random() < 0.08) enemies.push({ x: Math.random() * 600, y: 0 });
+                ctx.fillText("🐢", px, py);
+                enemies.forEach((e, i) => {
+                    e.y += 5;
+                    ctx.fillText("🚫", e.x, e.y);
+                    if (Math.hypot(e.x - px, e.y - py) < 20) { score = 0; enemies = []; }
+                    if (e.y > 400) { score++; enemies.splice(i, 1); }
+                });
+                ctx.fillText("Dodge the Poison! Distance: " + score, 10, 20);
+                animationId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        // --- GAME 5: ZAP ---
+        function playZap() {
+            let target = { x: 300, y: 200 };
+            canvas.onclick = (e) => {
+                if (Math.hypot(target.x - e.offsetX, target.y - e.offsetY) < 40) {
+                    score++;
+                    target = { x: Math.random() * 500 + 50, y: Math.random() * 300 + 50 };
+                }
+            }
+            function loop() {
+                ctx.clearRect(0, 0, 600, 400);
+                ctx.fillStyle = "red";
+                ctx.beginPath(); ctx.arc(target.x, target.y, 20, 0, Math.PI * 2); ctx.fill();
+                ctx.fillText("Zap the Trash Target! Score: " + score, 10, 20);
+                animationId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+    </script>
+</body>
+
+</html>

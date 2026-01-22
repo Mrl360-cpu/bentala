@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bentala Mapalus | Green Community</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <!-- Mesh Background System -->
+  <div class="mesh-bg"></div>
+  <div class="leaf-float" style="top: -10%; left: 10%;"><i class="fas fa-leaf"></i></div>
+  <div class="leaf-float" style="top: 20%; left: 80%; animation-delay: -5s;"><i class="fas fa-leaf"></i></div>
+  <div class="leaf-float" style="top: 60%; left: 30%; animation-delay: -10s;"><i class="fas fa-leaf"></i></div>
+  <div class="blob-container">
+    <div class="blob"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay"></div>
+
+  <!-- Assistant Guide & BenMind -->
+  <div class="assistant-guide" id="assistant-guide">
+    <div class="speech-bubble" id="speech-bubble" style="display: none;">
+      <p id="assistant-text">Halo! Saya BenMind. Butuh bantuan?</p>
+      <button class="assistant-next-btn" id="assistant-next">Jelajah</button>
+    </div>
+    <div class="assistant-avatar" id="assistant-avatar">
+      <i class="fas fa-leaf"></i>
+    </div>
+  </div>
+
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">
+      <h3>BenMind AI</h3>
+      <button class="close-chat" id="close-chat">&times;</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot">Halo! Saya BenMind. Mari kita lestarikan alam bersama-sama. Apa yang ingin kamu ketahui?
+      </div>
+    </div>
+    <div class="typing-indicator" id="typing-indicator">BenMind sedang mengetik...</div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chat-input" placeholder="Tanya sesuatu...">
+      <button class="chat-send" id="chat-send">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="LOGO BENTALA.png" alt="Bentala Mapalus Logo">
+        BENTALA MAPALUS
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="tentangkami.html">About</a></li>
+        <li><a href="galeri.html">Gallery</a></li>
+        <li><a href="kerja sama.html">Partner</a></li>
+        <li><a href="donasi.html">Donate</a></li>
+        <li><a href="hubungi kami.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <!-- Modernized Hero Slider -->
+      <div class="hero-slider">
+        <div class="hero-slide active">
+          <img src="Manado Tua Island, sunset in Manado Bay.jpg" alt="Manado Tua Island">
+        </div>
+        <div class="hero-slide">
+          <img src="Monumen Yesus Memberkati, Manado, Sulawesi Utara.jpg" alt="Monumen Yesus Memberkati">
+        </div>
+        <div class="hero-slide">
+          <img src="Bunaken Island - Manado.jpg" alt="Bunaken">
+        </div>
+        <div class="hero-overlay-dark"></div>
+      </div>
+
+      <div class="hero-tag">Sulawesi Utara Conservation</div>
+      <h1 class="hero-main-title">BENTALA MAPALUS</h1>
+      <p>Aksi nyata pelestarian alam Sulawesi Utara melalui kolaborasi dan kepedulian komunitas.</p>
+      <div class="hero-btns">
+        <a href="donasi.html" class="btn-wow btn-primary-wow">Join the Movement</a>
+        <a href="tentangkami.html" class="btn-wow btn-outline-wow">Learn More</a>
+      </div>
+    </section>
+
+    <section id="programs" class="reveal-wow">
+      <h2 class="section-title">Our Initiatives.</h2>
+      <div class="grid-wow">
+        <div class="card-wow">
+          <i class="fas fa-tree"></i>
+          <h3>Bibit Gratis</h3>
+          <p>Membagikan bibit pohon endemik Sulawesi Utara untuk menghijaukan kembali lahan kritis secara gratis.</p>
+        </div>
+        <div class="card-wow">
+          <i class="fas fa-water"></i>
+          <h3>Clean Ocean</h3>
+          <p>Aksi bersih-bersih pantai dan dasar laut dari sampah plastik untuk melindungi biodiversitas laut kita.</p>
+        </div>
+        <div class="card-wow">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Edukasi Hijau</h3>
+          <p>Menanamkan kesadaran lingkungan sejak dini melalui workshop dan kelas inspirasi di sekolah-sekolah.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal-wow"
+      style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 150px; padding-bottom: 150px;">
+      <h2 style="font-family: 'Outfit'; font-size: 3.5rem; margin-bottom: 2rem;">Ready to make an impact?</h2>
+      <p style="color: #94a3b8; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Dukungan
+        sekecil apapun dari Anda sangat berarti bagi kelestarian alam Sulawesi Utara.</p>
+      <a href="donasi.html" class="btn-wow btn-primary-wow" style="font-size: 1.5rem; padding: 24px 64px;">DONASI
+        SEKARANG</a>
+    </section>
+  </main>
+
+  <footer
+    style="padding: 100px 20px; border-top: 1px solid var(--glass-border); text-align: center; background: rgba(0,0,0,0.2);">
+    <div class="logo" style="margin-bottom: 2rem; font-size: 2rem;">BENTALA MAPALUS</div>
+    <p style="color: #64748b; margin-bottom: 2rem;">© 2026 Bentala Mapalus Community. All rights reserved.</p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <a href="#" style="color: var(--emerald); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="color: var(--emerald); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+      <a href="#" style="color: var(--emerald); font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
